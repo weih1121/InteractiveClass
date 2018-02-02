@@ -28,7 +28,7 @@ class MainWindow(QGraphicsView):
         self.fontNow = QFont('Sans')
         self.clipboard = QApplication.clipboard()
 
-        self.drawListResult = []  # draw list that sure to be drew, [action, coord]
+        self.drawListResult = []  # DrawPicture list that sure to be drew, [action, coord]
         self.drawListProcess = None  # the process to the result
         self.selectedArea = QRect()  # a QRect instance which stands for the selected area
         self.selectedAreaRaw = QRect()
@@ -42,8 +42,8 @@ class MainWindow(QGraphicsView):
 
         self.startX, self.startY = 0, 0  # the point where you start
         self.endX, self.endY = 0, 0  # the point where you end
-        self.pointPath = QPainterPath()  # the point mouse passes, used by draw free line
-        self.itemsToRemove = []  # the items that should not draw on screenshot picture
+        self.pointPath = QPainterPath()  # the point mouse passes, used by DrawPicture free line
+        self.itemsToRemove = []  # the items that should not DrawPicture on screenshot picture
         self.textPosition = None
 
         # Init window
@@ -383,12 +383,12 @@ class MainWindow(QGraphicsView):
         if magnifierArea.bottom() + fontAreaHeight >= self.screenPixel.height():
             magnifierArea.moveTop(self.mousePoint.y() - magnifierAreaHeight - cursorSize / 2 - fontAreaHeight)
 
-        # third, draw the watch area to magnifier area
+        # third, DrawPicture the watch area to magnifier area
         watchAreaScaled = watchAreaPixmap.scaled(QSize(magnifierAreaWidth, magnifierAreaHeight))
         magnifierPixmap = self.graphicsScene.addPixmap(watchAreaScaled)
         magnifierPixmap.setOffset(magnifierArea.topLeft())
 
-        # then draw lines and text
+        # then DrawPicture lines and text
         self.graphicsScene.addRect(QRectF(magnifierArea), QPen(QColor(255, 255, 255), 2))
         self.graphicsScene.addLine(QLineF(QPointF(magnifierArea.center().x(), magnifierArea.top()),
                                           QPointF(magnifierArea.center().x(), magnifierArea.bottom())),
@@ -400,7 +400,7 @@ class MainWindow(QGraphicsView):
         # get the rgb of mouse point
         pointRgb = QColor(self.screenPixel.toImage().pixel(self.mousePoint))
 
-        # draw information
+        # DrawPicture information
         self.graphicsScene.addRect(QRectF(magnifierArea.bottomLeft(),
                                           magnifierArea.bottomRight() + QPoint(0, fontAreaHeight)),
                                    Qt.black,
@@ -453,7 +453,7 @@ class MainWindow(QGraphicsView):
     def redraw(self):
         self.graphicsScene.clear()
 
-        # draw screenshot
+        # DrawPicture screenshot
         self.graphicsScene.addPixmap(self.screenPixel)
 
         # prepare for drawing selected area
@@ -469,7 +469,7 @@ class MainWindow(QGraphicsView):
         bottomMiddlePoint = (bottomLeftPoint + bottomRightPoint) / 2
         rightMiddlePoint = (topRightPoint + bottomRightPoint) / 2
 
-        # draw the picture mask
+        # DrawPicture the picture mask
         mask = QColor(0, 0, 0, 155)
 
         if self.selectedArea == QRect():
@@ -486,7 +486,7 @@ class MainWindow(QGraphicsView):
                                        self.screenPixel.width(), self.screenPixel.height() - bottomLeftPoint.y(),
                                        mask, mask)
 
-        # draw the magnifier
+        # DrawPicture the magnifier
         if self.action == ACTION_SELECT:
             self.drawMagnifier()
             if self.mousePressed:
@@ -495,7 +495,7 @@ class MainWindow(QGraphicsView):
         if self.action == ACTION_MOVE_SELECTED:
             self.drawSizeInfo()
 
-        # draw the toolBar
+        # DrawPicture the toolBar
         if self.action != ACTION_SELECT:
             spacing = 5
             dest = QPointF(rect.bottomRight() - QPointF(self.tooBar.width(), 0) - QPointF(spacing, -spacing))
@@ -521,7 +521,7 @@ class MainWindow(QGraphicsView):
             self.tooBar.hide()
             self.penSetBar.hide()
 
-        # draw the list
+        # DrawPicture the list
         for step in self.drawListResult:
             self.drawOneStep(step)
 
@@ -533,11 +533,11 @@ class MainWindow(QGraphicsView):
         if self.selectedArea != QRect():
             self.itemsToRemove = []
 
-            # draw the selected rectangle
+            # DrawPicture the selected rectangle
             pen = QPen(QColor(0, 255, 255), 2)
             self.itemsToRemove.append(self.graphicsScene.addRect(rect, pen))
 
-            # draw the drag point
+            # DrawPicture the drag point
             radius = QPoint(3, 3)
             brush = QBrush(QColor(0, 255, 255))
             self.itemsToRemove.append(
@@ -558,7 +558,7 @@ class MainWindow(QGraphicsView):
             self.itemsToRemove.append(
                 self.graphicsScene.addEllipse(QRectF(bottomRightPoint - radius, bottomRightPoint + radius), pen, brush))
 
-        # draw the textedit
+        # DrawPicture the textedit
         if self.textPosition is not None:
             textSpacing = 50
             position = QPoint()
@@ -646,7 +646,7 @@ class MainWindow(QGraphicsView):
             textAdd.setBrush(QBrush(step[4]))
             self.textRect = textAdd.boundingRect()
 
-    # draw the size information on the top left corner
+    # DrawPicture the size information on the top left corner
     def drawSizeInfo(self):
         sizeInfoAreaWidth = 100
         sizeInfoAreaHeight = 20

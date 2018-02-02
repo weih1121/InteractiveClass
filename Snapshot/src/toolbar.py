@@ -22,7 +22,7 @@ class MyToolBar(QWidget):
         self.initWindow()
 
     def initDrawButtons(self):
-        # draw action buttons
+        # DrawPicture action buttons
         self.rectButton = QPushButton(self)
         self.rectButton.setIcon(QIcon("../icons/rect.png"))
         self.rectButton.setFixedSize(self.iconWidth, self.iconHeight)

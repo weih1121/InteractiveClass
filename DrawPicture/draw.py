@@ -3,15 +3,14 @@ from PyQt5.QtWidgets import (QApplication, QWidget)
 from PyQt5.QtGui import (QPainter, QPen)
 from PyQt5.QtCore import Qt
 
-class Example(QWidget):
-
+class Draw(QWidget):
  def __init__(self):
-  super(Example, self).__init__()
+  super(Draw, self).__init__()
 
   #resize设置宽高，move设置位置
   self.resize(600, 600)
   self.move(100, 100)
-  self.setWindowTitle("简单的画板4.0")
+  self.setWindowTitle("画板")
 
   #setMouseTracking设置为False，否则不按下鼠标时也会跟踪鼠标事件
   self.setMouseTracking(False)
@@ -83,11 +82,10 @@ class Example(QWidget):
   '''
   pos_test = (-1, -1)
   self.pos_xy.append(pos_test)
-
   self.update()
 
 if __name__ == "__main__":
  app = QApplication(sys.argv)
- pyqt_learn = Example()
+ pyqt_learn = Draw()
  pyqt_learn.show()
  app.exec_()

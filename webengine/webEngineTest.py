@@ -1,10 +1,12 @@
+
+
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
-from DrawPicture import draw
-import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
 
+import sys
 
 class MainWindow(QMainWindow):
     # noinspection PyUnresolvedReferences
@@ -38,10 +40,10 @@ class MainWindow(QMainWindow):
 
         #QAction类提供了抽象的用户界面action，这些action可以被放置在窗口部件中
         # 添加前进、后退、停止加载和刷新的按钮
-        back_button = QAction(QIcon('./icons/back.png'), 'Back', self)
-        next_button = QAction(QIcon('./icons/next.png'), 'Forward', self)
-        stop_button = QAction(QIcon('./icons/cross.png'), 'stop', self)
-        reload_button = QAction(QIcon('./icons/renew.png'), 'reload', self)
+        back_button = QAction(QIcon('images/icons/back.png'), 'Back', self)
+        next_button = QAction(QIcon('images/icons/next.png'), 'Forward', self)
+        stop_button = QAction(QIcon('images/icons/cross.png'), 'stop', self)
+        reload_button = QAction(QIcon('images/icons/renew.png'), 'reload', self)
 
         back_button.triggered.connect(self.browser.back)
         next_button.triggered.connect(self.browser.forward)
@@ -65,66 +67,65 @@ class MainWindow(QMainWindow):
         #让浏览器相应url地址的变化
         self.browser.urlChanged.connect(self.renew_urlbar)
 
-        self.RightToolBar = QToolBar('ToolBar')  # 增加一个右侧的ToolBar
-        self.RightToolBar.setIconSize(QSize(30, 30))  # 将ToolBar的图标设置成30 * 30
-        self.addToolBar(Qt.RightToolBarArea, self.RightToolBar)  # 将ToolBar添加上去
+        self.RightToolBar = QToolBar('ToolBar')                                                         # 增加一个右侧的ToolBar
+        self.RightToolBar.setIconSize(QSize(30, 30))                                                    # 将ToolBar的图标设置成30 * 30
+        self.addToolBar(QtCore.Qt.RightToolBarArea, self.RightToolBar)  # 将ToolBar添加上去
 
-        self.actionbroswer = QAction('Browser')  # 设置浏览器bar
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/ie.png'), QIcon.Normal, QIcon.Off)
+        self.actionbroswer = QtWidgets.QAction('Browser')                                               #设置浏览器bar
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/ie.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionbroswer.setIcon(icon)
         self.actionbroswer.setObjectName("actionbroswer")
         self.RightToolBar.addAction(self.actionbroswer)
 
-        self.actionscreen = QAction('Scren')  # 设置共享屏幕
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/screen.png'), QIcon.Normal, QIcon.Off)
+        self.actionscreen = QtWidgets.QAction('Scren')                                                   #设置共享屏幕
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/screen.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionscreen.setIcon(icon)
         self.actionscreen.setObjectName("actionscreen")
         self.RightToolBar.addAction(self.actionscreen)
 
-        self.actiondrawboard = QAction("DrawBoard")  # 设置画板
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/huaban.png'), QIcon.Normal, QIcon.Off)
+        self.actiondrawboard = QtWidgets.QAction("DrawBoard")                                            #设置画板
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/huaban.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actiondrawboard.setIcon(icon)
         self.actiondrawboard.setObjectName("DrawBoard")
         self.RightToolBar.addAction(self.actiondrawboard)
 
-        self.actionchat = QAction("Chat")  # 设置chat
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
+        self.actionchat = QtWidgets.QAction("Chat")                                                         #设置chat
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/penguin.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionchat.setIcon(icon)
         self.actionchat.setObjectName("Chat")
         self.RightToolBar.addAction(self.actionchat)
 
-        self.actionchat = QAction("Chat")  # 设置录屏
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
+        self.actionchat = QtWidgets.QAction("Chat")                                                         # 设置录屏
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/penguin.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionchat.setIcon(icon)
         self.actionchat.setObjectName("Chat")
         self.RightToolBar.addAction(self.actionchat)
 
-        self.actionopenfile = QAction("OpenFile")  # 设置打开文件
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/find.png'), QIcon.Normal, QIcon.Off)
+        self.actionopenfile = QtWidgets.QAction("OpenFile")                                                 # 设置打开文件
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/find.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionopenfile.setIcon(icon)
         self.actionopenfile.setObjectName("Chat")
         self.RightToolBar.addAction(self.actionopenfile)
 
-        self.actionsnapshot = QAction("SnapShot")  # 设置截屏
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/jianqieban.png'), QIcon.Normal, QIcon.Off)
+        self.actionsnapshot = QtWidgets.QAction("SnapShot")                                                   # 设置截屏
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/jianqieban.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionsnapshot.setIcon(icon)
         self.actionsnapshot.setObjectName("SnapShot")
         self.RightToolBar.addAction(self.actionsnapshot)
 
-        self.actionclass = QAction("Class")  # 设置分组
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/about.png'), QIcon.Normal, QIcon.Off)
+        self.actionclass = QtWidgets.QAction("Class")                                                          # 设置分组
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('images/toolBarIcon/about.png'), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionclass.setIcon(icon)
         self.actionclass.setObjectName("SnapShot")
         self.RightToolBar.addAction(self.actionclass)
-
 
     def navigate_to_url(self):
         q = QUrl(self.urlbar.text())
