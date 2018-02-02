@@ -1,21 +1,32 @@
+
+
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 import sys
 
 class MainWindow(QMainWindow):
+    # noinspection PyUnresolvedReferences
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setWindowTitle('吉林省昌裕恒科技有限公司')
-        self.setWindowIcon(QIcon('../images/penguin.png'))
-        self.resize(900, 600)
+        # 设置窗口标题
+        self.setWindowTitle('吉林省裕昌恒科技有限公司互动课堂')
+        # 设置窗口图标
+        self.setWindowIcon(QIcon('images/icons/penguin.png'))
+        # 设置窗口大小900*600
+        self.resize(800, 600)
         self.show()
 
-        self.browser = QWebEngineView()
-        url = 'http://www.baidu.com'
+        # 设置浏览器
+        self.browser = QWebEngineView ()
+        #browser = QWebView()
+        url = 'https://www.baidu.com'
+        # 指定打开界面的 URL
         self.browser.setUrl(QUrl(url))
+        # 添加浏览器到窗口中
         self.setCentralWidget(self.browser)
 
 
@@ -29,10 +40,10 @@ class MainWindow(QMainWindow):
 
         #QAction类提供了抽象的用户界面action，这些action可以被放置在窗口部件中
         # 添加前进、后退、停止加载和刷新的按钮
-        back_button = QAction(QIcon('icons/back.png'), 'Back', self)
-        next_button = QAction(QIcon('icons/next.png'), 'Forward', self)
-        stop_button = QAction(QIcon('icons/cross.png'), 'stop', self)
-        reload_button = QAction(QIcon('icons/renew.png'), 'reload', self)
+        back_button = QAction(QIcon('./icons/back.png'), 'Back', self)
+        next_button = QAction(QIcon('./icons/next.png'), 'Forward', self)
+        stop_button = QAction(QIcon('./icons/cross.png'), 'stop', self)
+        reload_button = QAction(QIcon('./icons/renew.png'), 'reload', self)
 
         back_button.triggered.connect(self.browser.back)
         next_button.triggered.connect(self.browser.forward)
@@ -56,6 +67,66 @@ class MainWindow(QMainWindow):
         #让浏览器相应url地址的变化
         self.browser.urlChanged.connect(self.renew_urlbar)
 
+        self.RightToolBar = QToolBar('ToolBar')  # 增加一个右侧的ToolBar
+        self.RightToolBar.setIconSize(QSize(30, 30))  # 将ToolBar的图标设置成30 * 30
+        self.addToolBar(Qt.RightToolBarArea, self.RightToolBar)  # 将ToolBar添加上去
+
+        self.actionbroswer = QAction('Browser')  # 设置浏览器bar
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/ie.png'), QIcon.Normal, QIcon.Off)
+        self.actionbroswer.setIcon(icon)
+        self.actionbroswer.setObjectName("actionbroswer")
+        self.RightToolBar.addAction(self.actionbroswer)
+
+        self.actionscreen = QAction('Scren')  # 设置共享屏幕
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/screen.png'), QIcon.Normal, QIcon.Off)
+        self.actionscreen.setIcon(icon)
+        self.actionscreen.setObjectName("actionscreen")
+        self.RightToolBar.addAction(self.actionscreen)
+
+        self.actiondrawboard = QAction("DrawBoard")  # 设置画板
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/huaban.png'), QIcon.Normal, QIcon.Off)
+        self.actiondrawboard.setIcon(icon)
+        self.actiondrawboard.setObjectName("DrawBoard")
+        self.RightToolBar.addAction(self.actiondrawboard)
+
+        self.actionchat = QAction("Chat")  # 设置chat
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
+        self.actionchat.setIcon(icon)
+        self.actionchat.setObjectName("Chat")
+        self.RightToolBar.addAction(self.actionchat)
+
+        self.actionchat = QAction("Chat")  # 设置录屏
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
+        self.actionchat.setIcon(icon)
+        self.actionchat.setObjectName("Chat")
+        self.RightToolBar.addAction(self.actionchat)
+
+        self.actionopenfile = QAction("OpenFile")  # 设置打开文件
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/find.png'), QIcon.Normal, QIcon.Off)
+        self.actionopenfile.setIcon(icon)
+        self.actionopenfile.setObjectName("Chat")
+        self.RightToolBar.addAction(self.actionopenfile)
+
+        self.actionsnapshot = QAction("SnapShot")  # 设置截屏
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/jianqieban.png'), QIcon.Normal, QIcon.Off)
+        self.actionsnapshot.setIcon(icon)
+        self.actionsnapshot.setObjectName("SnapShot")
+        self.RightToolBar.addAction(self.actionsnapshot)
+
+        self.actionclass = QAction("Class")  # 设置分组
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/about.png'), QIcon.Normal, QIcon.Off)
+        self.actionclass.setIcon(icon)
+        self.actionclass.setObjectName("SnapShot")
+        self.RightToolBar.addAction(self.actionclass)
+
     def navigate_to_url(self):
         q = QUrl(self.urlbar.text())
         if q.scheme() == '':
@@ -67,12 +138,12 @@ class MainWindow(QMainWindow):
         self.urlbar.setText(q.toString())
         self.urlbar.setCursorPosition(0)
 
-
-# 创建应用
-app = QApplication(sys.argv)
-# 创建主窗口
-window = MainWindow()
-# 显示窗口
-window.show()
-# 运行应用，并监听事件
-app.exec_()
+if __name__ == '__main__':
+    # 创建应用
+    app = QApplication(sys.argv)
+    # 创建主窗口
+    window = MainWindow()
+    # 显示窗口
+    window.show()
+    # 运行应用，并监听事件
+    app.exec_()

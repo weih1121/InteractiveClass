@@ -95,7 +95,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -146,7 +146,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -186,33 +186,11 @@
      <x>0</x>
      <y>0</y>
      <width>784</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>RightToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="action_surf"/>
-   <addaction name="separator"/>
-   <addaction name="action_grouping"/>
-   <addaction name="separator"/>
-   <addaction name="action_draw"/>
-   <addaction name="separator"/>
-   <addaction name="action_shortCut"/>
-   <addaction name="separator"/>
-   <addaction name="action_shareScreen"/>
-   <addaction name="separator"/>
-   <addaction name="action_contral"/>
-  </widget>
   <action name="action_surf">
    <property name="text">
     <string>上网</string>

@@ -1,5 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 from CustomWidget import CustomWidget
 from group import Ui_MainWindow
 
@@ -18,8 +20,69 @@ class Grouping(QMainWindow, Ui_MainWindow):
         self.ui.spinBox_col.valueChanged.connect(self.UpdateWin)
 
         self.ui.pushButton_grouping.pressed.connect(self.HandleButtonContral)   #分组控制信号与对应的槽函数
-
         self.ui.spinBox_groupNum.valueChanged.connect(self.addGroupNum)
+
+        self.setWindowTitle("设置分组")
+
+        self.RightToolBar = QToolBar('ToolBar')  # 增加一个右侧的ToolBar
+        self.RightToolBar.setIconSize(QSize(30, 30))  # 将ToolBar的图标设置成30 * 30
+        self.addToolBar(Qt.RightToolBarArea, self.RightToolBar)  # 将ToolBar添加上去
+
+        self.actionbroswer = QAction('Browser')  # 设置浏览器bar
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/ie.png'), QIcon.Normal, QIcon.Off)
+        self.actionbroswer.setIcon(icon)
+        self.actionbroswer.setObjectName("actionbroswer")
+        self.RightToolBar.addAction(self.actionbroswer)
+
+        self.actionscreen = QAction('Scren')  # 设置共享屏幕
+        icon =  QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/screen.png'), QIcon.Normal, QIcon.Off)
+        self.actionscreen.setIcon(icon)
+        self.actionscreen.setObjectName("actionscreen")
+        self.RightToolBar.addAction(self.actionscreen)
+
+        self.actiondrawboard = QAction("DrawBoard")  # 设置画板
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/huaban.png'), QIcon.Normal, QIcon.Off)
+        self.actiondrawboard.setIcon(icon)
+        self.actiondrawboard.setObjectName("DrawBoard")
+        self.RightToolBar.addAction(self.actiondrawboard)
+
+        self.actionchat = QAction("Chat")  # 设置chat
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
+        self.actionchat.setIcon(icon)
+        self.actionchat.setObjectName("Chat")
+        self.RightToolBar.addAction(self.actionchat)
+
+        self.actionchat = QAction("Chat")  # 设置录屏
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
+        self.actionchat.setIcon(icon)
+        self.actionchat.setObjectName("Chat")
+        self.RightToolBar.addAction(self.actionchat)
+
+        self.actionopenfile = QAction("OpenFile")  # 设置打开文件
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/find.png'), QIcon.Normal, QIcon.Off)
+        self.actionopenfile.setIcon(icon)
+        self.actionopenfile.setObjectName("Chat")
+        self.RightToolBar.addAction(self.actionopenfile)
+
+        self.actionsnapshot = QAction("SnapShot")  # 设置截屏
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/jianqieban.png'), QIcon.Normal, QIcon.Off)
+        self.actionsnapshot.setIcon(icon)
+        self.actionsnapshot.setObjectName("SnapShot")
+        self.RightToolBar.addAction(self.actionsnapshot)
+
+        self.actionclass = QAction("Class")  # 设置分组
+        icon = QIcon()
+        icon.addPixmap(QPixmap('../images/toolBarIcon/about.png'), QIcon.Normal, QIcon.Off)
+        self.actionclass.setIcon(icon)
+        self.actionclass.setObjectName("SnapShot")
+        self.RightToolBar.addAction(self.actionclass)
 
     def UpdateWin(self):
         row = self.ui.spinBox_row.value()
