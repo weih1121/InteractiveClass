@@ -112,7 +112,7 @@ class MyToolBar(QWidget):
     def initWindow(self):
         self.hlayout = QHBoxLayout()
         self.hlayout.setSpacing(2)
-        self.hlayout.setContentsMargins(10, 2, 10, 2)
+        self.hlayout.setContentsMargins(10, 2, 10, 2)                   #设置布局的外边距左上右下
         self.setLayout(self.hlayout)
 
         self.initDrawButtons()
