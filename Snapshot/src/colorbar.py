@@ -39,7 +39,7 @@ class PenSetWidget(QWidget):
         self.mainLayout = QHBoxLayout()
         self.setLayout(self.mainLayout)
         self.mainLayout.setSpacing(0)
-        self.mainLayout.setContentsMargins(5, 2, 5, 2)
+        self.mainLayout.setContentsMargins(5, 2, 5, 2)       #设置布局的外边距 左上右下
         self.setFixedWidth(300)
 
         self.initPenSizeButtons()

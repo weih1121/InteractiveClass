@@ -2,8 +2,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
-from DrawPicture import draw
 import sys
+
+from DrawPicture.draw import Draw
+from Grouping.grouping import Grouping
+from Snapshot.src.screenshot import SnapShot
 
 
 class MainWindow(QMainWindow):
@@ -76,7 +79,7 @@ class MainWindow(QMainWindow):
         self.actionbroswer.setObjectName("actionbroswer")
         self.RightToolBar.addAction(self.actionbroswer)
 
-        self.actionscreen = QAction('Scren')  # 设置共享屏幕
+        self.actionscreen = QAction('Screen')  # 设置共享屏幕
         icon = QIcon()
         icon.addPixmap(QPixmap('../images/toolBarIcon/screen.png'), QIcon.Normal, QIcon.Off)
         self.actionscreen.setIcon(icon)
@@ -89,15 +92,9 @@ class MainWindow(QMainWindow):
         self.actiondrawboard.setIcon(icon)
         self.actiondrawboard.setObjectName("DrawBoard")
         self.RightToolBar.addAction(self.actiondrawboard)
+        self.actiondrawboard.triggered.connect(self.CallDrawPicture)
 
         self.actionchat = QAction("Chat")  # 设置chat
-        icon = QIcon()
-        icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
-        self.actionchat.setIcon(icon)
-        self.actionchat.setObjectName("Chat")
-        self.RightToolBar.addAction(self.actionchat)
-
-        self.actionchat = QAction("Chat")  # 设置录屏
         icon = QIcon()
         icon.addPixmap(QPixmap('../images/toolBarIcon/penguin.png'), QIcon.Normal, QIcon.Off)
         self.actionchat.setIcon(icon)
@@ -117,6 +114,7 @@ class MainWindow(QMainWindow):
         self.actionsnapshot.setIcon(icon)
         self.actionsnapshot.setObjectName("SnapShot")
         self.RightToolBar.addAction(self.actionsnapshot)
+        self.actionsnapshot.triggered.connect(self.CallSnapShot)
 
         self.actionclass = QAction("Class")  # 设置分组
         icon = QIcon()
@@ -124,6 +122,7 @@ class MainWindow(QMainWindow):
         self.actionclass.setIcon(icon)
         self.actionclass.setObjectName("SnapShot")
         self.RightToolBar.addAction(self.actionclass)
+        self.actionclass.triggered.connect(self.CallGrouping)
 
 
     def navigate_to_url(self):
@@ -136,6 +135,18 @@ class MainWindow(QMainWindow):
         # 将当前网页的链接更新到地址栏
         self.urlbar.setText(q.toString())
         self.urlbar.setCursorPosition(0)
+
+    def CallDrawPicture(self):
+        drawPicture = Draw()
+        drawPicture.show()
+
+    def CallGrouping(self):
+        group = Grouping()
+        group.show()
+
+    def CallSnapShot(self):
+        snapshot = SnapShot()
+        snapshot.show()
 
 if __name__ == '__main__':
     # 创建应用

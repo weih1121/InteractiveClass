@@ -2,8 +2,8 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from CustomWidget import CustomWidget
-from group import Ui_MainWindow
+from Grouping.CustomWidget import CustomWidget
+from Grouping.group import Ui_MainWindow
 
 
 class Grouping(QMainWindow, Ui_MainWindow):

@@ -15,7 +15,7 @@ from math import *
 qtApp = None
 
 
-class MainWindow(QGraphicsView):
+class SnapShot(QGraphicsView):
     """ Main Class """
 
     def __init__(self):
@@ -760,7 +760,7 @@ class MainWindow(QGraphicsView):
         self.redraw()
 
     def saveOperation(self):
-        filename = QFileDialog.getSaveFileName(self, 'Save file', './screenshot.png', '*.png;;*.jpg')
+        filename = QFileDialog.getSaveFileName(self, 'Save file', '../Snapcut/screenshot.png', '*.png;;*.jpg')
         if len(filename[0]) == 0:
             return
         else:
@@ -821,7 +821,7 @@ class MainWindow(QGraphicsView):
 
 if __name__ == "__main__":
     qtApp = QApplication(sys.argv)
-    window = MainWindow()
+    window = SnapShot()
     window.show()
     # window.test()
 
